@@ -5,6 +5,7 @@ for i = 1:4
     lat = ncread(ncfile,'latitude'); 
     ny = length(lat); 
     time = ncread(ncfile,'time');
+    switch_menu = true;
 
 
     worldmap('Europe')
@@ -18,8 +19,8 @@ for i = 1:4
     for i = 1:length(time)
         unknown = ncread(ncfile,'unknown',[1 1 i],[nx ny 1]);
         
-        if (m==1)
-            answer=menu("color blind mode on or off?",...
+        if (switch_menu)
+            answer = menu("color blind mode on or off?",...
                 'on',...
                 'off');
             if answer==1
@@ -27,7 +28,7 @@ for i = 1:4
             elseif answer == 2
                 colormap default;
             end
-            m=0;
+            switch_menu = false;
         end 
 
         load coastlines
