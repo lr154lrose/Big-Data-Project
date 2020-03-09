@@ -17,6 +17,18 @@ for i = 1:4
 
     for i = 1:length(time)
         unknown = ncread(ncfile,'unknown',[1 1 i],[nx ny 1]);
+        
+        if (m==1)
+            answer=menu("color blind mode on or off?",...
+                'on',...
+                'off');
+            if answer==1
+                colormap summer;
+            elseif answer == 2
+                colormap default;
+            end
+            m=0;
+        end 
 
         load coastlines
         plotm(coastlat,coastlon)
