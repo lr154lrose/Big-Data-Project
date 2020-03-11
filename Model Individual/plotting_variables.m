@@ -1,4 +1,4 @@
-for i = 1:4
+for i = 1:7
     ncfile = strcat(int2str(i),".nc")
     lon = ncread(ncfile,'longitude'); 
     nx = length(lon); 
@@ -6,18 +6,19 @@ for i = 1:4
     ny = length(lat); 
     time = ncread(ncfile,'time');
     switch_menu = true;
-
+    t = (time - 1038720);
 
     worldmap('Europe')
     load coastlines
     plotm(coastlat,coastlon)
 
+    %axesm 
     [X,Y] = meshgrid(lon, lat);
     X = double(X);
     Y = double(Y);
 
-    for i = 1:length(time)
-        unknown = ncread(ncfile,'unknown',[1 1 i],[nx ny 1]);
+    for t = 1:length(time)
+        unknown = ncread(ncfile,'unknown',[1 1 t],[nx ny 1]);
         
         if (switch_menu)
             answer = menu("color blind mode on or off?",...
@@ -34,25 +35,16 @@ for i = 1:4
         load coastlines
         plotm(coastlat,coastlon)
 
-        land = shaperead('landareas', 'UseGeoCoords', true);
-        geoshow(gca, land, 'FaceColor', [0.5 0.7 0.5])
 
-        lakes = shaperead('worldlakes', 'UseGeoCoords', true);
-        geoshow(lakes, 'FaceColor', 'blue')
-
-        rivers = shaperead('worldrivers', 'UseGeoCoords', true);
-        geoshow(rivers, 'Color', 'blue')
-
-        cities = shaperead('worldcities', 'UseGeoCoords', true);
-        geoshow(cities, 'Marker', '.', 'Color', 'red')
-
-        size(unknown)
-        size(X)
+        %size(unknown)
+        %size(X)
         %pcolor(lon,lat,unknown'); 
 
         surfm(Y, X, unknown', 'EdgeColor', 'none','FaceAlpha', 0.5)
         shading interp
-        title("Plotting the nc file variables")
+        %xlabel('Longitude');
+        %ylabel('Latitude');
+        title(sprintf('time: %i', (t)))
         colorbar
         drawnow
     end
