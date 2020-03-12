@@ -1,3 +1,5 @@
+switch_menu = true;
+
 for i = 1:7
     ncfile = strcat(int2str(i),".nc")
     lon = ncread(ncfile,'longitude'); 
@@ -5,7 +7,6 @@ for i = 1:7
     lat = ncread(ncfile,'latitude'); 
     ny = length(lat); 
     time = ncread(ncfile,'time');
-    switch_menu = true;
     t = (time - 1038720);
 
     worldmap('Europe')
@@ -35,7 +36,6 @@ for i = 1:7
         load coastlines
         plotm(coastlat,coastlon)
 
-
         %size(unknown)
         %size(X)
         %pcolor(lon,lat,unknown'); 
@@ -44,7 +44,7 @@ for i = 1:7
         shading interp
         %xlabel('Longitude');
         %ylabel('Latitude');
-        title(sprintf('time: %i', (t)))
+        title(sprintf('time: %i:00', (t)))
         colorbar
         drawnow
     end
