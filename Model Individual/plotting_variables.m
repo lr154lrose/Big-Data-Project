@@ -25,26 +25,27 @@ for i = 1:7
             answer = listdlg('PromptString', {'Please select a colour mode.', ...
                 'You can only select one.'}, ...
                 'SelectionMode', 'Single', 'ListString', {'Colour blind', ...
-                'Default', 'Winter', 'Spring', 'Autumn', 'Black & White' ...
-                'Pink', 'Hot', 'Cold'});
-            if answer == 1
-                colormap summer;
-            elseif answer == 2
-                colormap default;
-            elseif answer == 3
-                colormap winter;
-            elseif answer == 4
-                colormap spring;
-            elseif answer == 5
-                colormap autumn;
-            elseif answer == 6
-                colormap gray;
-            elseif answer == 7
-                colormap pink;
-            elseif answer == 8 
-                colormap hot;
-            elseif answer == 9
-                colormap cold;
+                'Default', 'Blue & Green', 'Yellow & Pink High Contrast', 'Warm', 'Black & White' ...
+                'Pink Weak Contrast', 'Warm High Contrast', 'Negative Effect'});
+            switch answer
+                case 1
+                    colormap summer;
+                case 2
+                    colormap default;
+                case 3
+                    colormap winter;
+                case 4
+                    colormap spring;
+                case 5
+                    colormap autumn;
+                case 6
+                    colormap gray;
+                case 7
+                    colormap pink;
+                case 8 
+                    colormap hot;
+                case 9
+                    colormap cool;
             end
         end 
 
