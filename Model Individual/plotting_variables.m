@@ -1,7 +1,7 @@
 answer = 0;
 
 for i = 1:7
-    ncfile = strcat(int2str(i),".nc")
+    ncfile = strcat(int2str(i),".nc");
     lon = ncread(ncfile,'longitude'); 
     nx = length(lon); 
     lat = ncread(ncfile,'latitude'); 
@@ -10,8 +10,8 @@ for i = 1:7
     t = (time - 1038720);
 
     worldmap('Europe')
-    load coastlines
-    plotm(coastlat,coastlon)
+    %load coastlines
+    %plotm(coastlat,coastlon)
 
     %axesm 
     [X,Y] = meshgrid(lon, lat);
@@ -60,7 +60,7 @@ for i = 1:7
         shading interp
         %xlabel('Longitude');
         %ylabel('Latitude');
-        title(sprintf('time: %i:00', (t)))
+        title(sprintf('time: %i:00', (t - 1)))
         colorbar
         drawnow
     end
