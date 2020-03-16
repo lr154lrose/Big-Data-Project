@@ -10,8 +10,8 @@ for i = 1:7
     t = (time - 1038720);
 
     worldmap('Europe')
-    %load coastlines
-    %plotm(coastlat,coastlon)
+    load coastlines
+    plotm(coastlat, coastlon, 'k', 'LineWidth', 0.1)
 
     %axesm 
     [X,Y] = meshgrid(lon, lat);
@@ -50,7 +50,7 @@ for i = 1:7
         end 
 
         load coastlines
-        plotm(coastlat,coastlon)
+        plotm(coastlat,coastlon, 'k', 'LineWidth', 0.1)
 
         %size(unknown)
         %size(X)
