@@ -1,4 +1,14 @@
 answer = 0;
+f = figure;
+colorbar
+set(gcf, 'Position',  [150, 100, 500, 500])
+
+slider_control = uicontrol('Parent',f,'Style','slider','Position',[43,20,419,23],...
+              'value', 0.5, 'min',0, 'max',4);
+bgcolor = f.Color;
+slider_text = uicontrol('Parent',f,'Style','text','Position',[50,53,140,13],...
+                'String','Europe outline thickness:','BackgroundColor',bgcolor);
+
 
 for i = 1:7
     ncfile = strcat(int2str(i),".nc");
@@ -9,9 +19,10 @@ for i = 1:7
     time = ncread(ncfile,'time');
     t = (time - 1038720);
 
+    
     worldmap('Europe')
     load coastlines
-    plotm(coastlat, coastlon, 'k', 'LineWidth', 0.1)
+    plotm(coastlat, coastlon, 'k', 'LineWidth', slider_control.Value)
 
     %axesm 
     [X,Y] = meshgrid(lon, lat);
@@ -50,18 +61,17 @@ for i = 1:7
         end 
 
         load coastlines
-        plotm(coastlat,coastlon, 'k', 'LineWidth', 0.1)
+        plotm(coastlat,coastlon, 'k', 'LineWidth', slider_control.Value)
 
         %size(unknown)
         %size(X)
         %pcolor(lon,lat,unknown'); 
 
-        surfm(Y, X, unknown', 'EdgeColor', 'none','FaceAlpha', 0.5)
-        shading interp
+        surfm(Y, X, unknown','FaceAlpha', 0.5); 
+        %shading interp
         %xlabel('Longitude');
         %ylabel('Latitude');
-        title(sprintf('time: %i:00', (t - 1)))
-        colorbar
+        title(sprintf('time: %i:00', (t-1)))
         drawnow
     end
 end
