@@ -1,13 +1,14 @@
 answer = 0;
 f = figure;
 colorbar
-set(gcf, 'Position',  [150, 100, 500, 500])
+set(gcf, 'Position',  [150, 100, 500, 500], 'Color', 'White')
 
 slider_control = uicontrol('Parent',f,'Style','slider','Position',[43,20,419,23],...
-              'value', 0.5, 'min',0, 'max',4);
-bgcolor = f.Color;
+              'value', 0.5, 'min',0.01, 'max',4, 'BackgroundColor', 'Black');
+          
 slider_text = uicontrol('Parent',f,'Style','text','Position',[50,53,140,13],...
-                'String','Europe outline thickness:','BackgroundColor',bgcolor);
+                'String','Europe outline thickness:','BackgroundColor', f.Color);
+            
 
 
 for i = 1:7
@@ -61,7 +62,7 @@ for i = 1:7
         end 
 
         load coastlines
-        plotm(coastlat,coastlon, 'k', 'LineWidth', slider_control.Value)
+        outline = plotm(coastlat,coastlon, 'k', 'LineWidth', slider_control.Value);
 
         %size(unknown)
         %size(X)
@@ -73,5 +74,6 @@ for i = 1:7
         %ylabel('Latitude');
         title(sprintf('time: %i:00', (t-1)))
         drawnow
+        delete(outline);
     end
 end
