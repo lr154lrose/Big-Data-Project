@@ -4,12 +4,14 @@ colorbar
 set(gcf, 'Position',  [150, 100, 500, 500], 'Color', 'White')
 
 slider_control = uicontrol('Parent',f,'Style','slider','Position',[43,20,419,23],...
-              'value', 0.5, 'min',0.01, 'max',4, 'BackgroundColor', 'Black');
+              'value', 0.5, 'min',0.001, 'max',4, 'BackgroundColor', 'Black');
           
 slider_text = uicontrol('Parent',f,'Style','text','Position',[50,53,140,13],...
                 'String','Europe outline thickness:','BackgroundColor', f.Color);
+           
+change_button = uicontrol('Parent', f,'Style', 'togglebutton', 'String', 'Change colormap', ...
+                'Position', [43,430,100,30]);
             
-
 
 for i = 1:7
     ncfile = strcat(int2str(i),".nc");
@@ -19,7 +21,6 @@ for i = 1:7
     ny = length(lat); 
     time = ncread(ncfile,'time');
     t = (time - 1038720);
-
     
     worldmap('Europe')
     load coastlines
@@ -32,8 +33,13 @@ for i = 1:7
 
     for t = 1:length(time)
         unknown = ncread(ncfile,'unknown',[1 1 t],[nx ny 1]);
-        
+            
+        if(change_button.Value == 1)
+            answer = 0;
+        end
+            
         if (answer == 0)
+            change_button.Value = 0;
             answer = listdlg('PromptString', {'Please select a colour mode.', ...
                 'You can only select one.'}, ...
                 'SelectionMode', 'Single', 'ListString', {'Colour blind', ...
