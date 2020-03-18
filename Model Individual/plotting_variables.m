@@ -33,10 +33,7 @@ for i = 1:7
     ny = length(lat); 
     time = ncread(ncfile,'time');
     t = (time - 1038720);
-    
-    worldmap('Europe')
-    load coastlines
-    plotm(coastlat, coastlon, 'k', 'LineWidth', slider_control.Value)
+   
 
     %axesm 
     [X,Y] = meshgrid(lon, lat);
@@ -45,6 +42,9 @@ for i = 1:7
 
     for t = 1:length(time)
         unknown = ncread(ncfile,'unknown',[1 1 t],[nx ny 1]);
+        worldmap('Europe')
+        load coastlines
+        plotm(coastlat, coastlon, 'k', 'LineWidth', slider_control.Value)
             
         if(change_button.Value == 1)
             answer = 0;
@@ -113,6 +113,8 @@ for i = 1:7
         %xlabel('Longitude');
         %ylabel('Latitude');
         drawnow
-        delete(outline);
+        %delete(outline);
+        cla
     end
 end
+clf
