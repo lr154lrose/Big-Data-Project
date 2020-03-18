@@ -9,8 +9,17 @@ slider_control = uicontrol('Parent',f,'Style','slider','Position',[43,20,419,23]
 slider_text = uicontrol('Parent',f,'Style','text','Position',[50,53,140,13],...
                 'String','Europe outline thickness:','BackgroundColor', f.Color);
            
-change_button = uicontrol('Parent', f,'Style', 'togglebutton', 'String', 'Change colormap', ...
-                'Position', [43,430,100,30]);
+change_button = uicontrol('Parent', f, 'Style', 'togglebutton', 'String', 'Change Colormap', ...
+                'Position', [43,430,100,30], 'BackgroundColor', 'Black', 'ForegroundColor', 'White');
+         
+river_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Add Rivers', ...
+                'Position', [43,465,100,20], 'BackgroundColor', 'Black', 'ForegroundColor', 'White');
+            
+city_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Add Cities', ...
+                'Position', [130,465,100,20], 'BackgroundColor', 'Black', 'ForegroundColor', 'White');
+          
+lake_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Add Lakes', ...
+                'Position', [210,465,90,20], 'BackgroundColor', 'Black', 'ForegroundColor', 'White');
             
 
 for i = 1:7
@@ -70,6 +79,22 @@ for i = 1:7
 
         load coastlines
         outline = plotm(coastlat,coastlon, 'k', 'LineWidth', slider_control.Value);
+        
+        if(river_checkbox.Value == 1)
+            rivers = shaperead('worldrivers', 'UseGeoCoords', true);
+            geoshow(rivers, 'Color', 'blue')
+        end
+        
+        if(city_checkbox.Value == 1)
+            cities = shaperead('worldcities', 'UseGeoCoords', true);
+            geoshow(cities, 'Marker', '.', 'Color', 'red')
+        end
+        
+        if(lake_checkbox.Value == 1)
+            lakes = shaperead('worldlakes', 'UseGeoCoords', true);
+            geoshow(lakes, 'FaceColor', 'blue')
+        end  
+            
 
         %size(unknown)
         %size(X)
