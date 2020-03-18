@@ -21,6 +21,9 @@ city_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Add Citie
 lake_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Add Lakes', ...
                 'Position', [210,465,90,20], 'BackgroundColor', 'Black', 'ForegroundColor', 'White');
             
+time_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Display time', ...
+                'Position', [290,465,90,20], 'BackgroundColor', 'Black', 'ForegroundColor', 'White');
+            
 
 for i = 1:7
     ncfile = strcat(int2str(i),".nc");
@@ -95,6 +98,11 @@ for i = 1:7
             geoshow(lakes, 'FaceColor', 'blue')
         end  
             
+        if(time_checkbox.Value == 1)
+            title(sprintf('time: %i:00', (t-1)))
+        else
+            title(sprintf(''))
+        end 
 
         %size(unknown)
         %size(X)
@@ -104,7 +112,6 @@ for i = 1:7
         %shading interp
         %xlabel('Longitude');
         %ylabel('Latitude');
-        title(sprintf('time: %i:00', (t-1)))
         drawnow
         delete(outline);
     end
