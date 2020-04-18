@@ -31,7 +31,7 @@ time_checkbox = uicontrol('Parent', f, 'Style', 'checkbox', 'String', 'Display t
             
             
 for i = 1:7                             %for loop iterating through al the nc files in the current directory
-    ncfile = strcat(int2str(i),".nc");  %converting the number to string and then storing it in the ncfile variable
+    ncfile = strcat("NC_files/",int2str(i),".nc");  %converting the number to string and then storing it in the ncfile variable
     lon = ncread(ncfile,'longitude');   %reading the data from the variable called "longitude" in the current nc file
     nx = length(lon);                   %getting the length of the object array
     lat = ncread(ncfile,'latitude');    %reading the data from the latitude
