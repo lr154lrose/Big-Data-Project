@@ -1,5 +1,6 @@
 answer = 0;                             %variable used for the colormap button 
 f = figure;                             %creating figure 
+zoom on 
 colorbar                                %displaying vertical colorbar in order to show the color scale 
 set(gcf, 'Position',  [150, 100, 500, 500], 'Color', 'White') %setting position of figure window, along with the background colour 
 
@@ -103,14 +104,14 @@ for i = 1:7                             %for loop iterating through al the nc fi
         end  
             
         if(time_checkbox.Value == 1)    %checking if box is ticked for displaying time 
-            title(sprintf('time: %i:00', (t-1))) %display the time above the map 
+            title(sprintf('time: %i:00', (t-1))) %display the time above the map lim = 
         else
             title(sprintf(''))          %else display nothing 
         end 
 
 %----------------------------------------------------------        
 
-        surfm(Y, X, unknown','FaceAlpha', 0.85); %project the variables from the nc file on the map axis, using "FaceAlpha" for the transparency 
+        surfm(Y, X, unknown,'FaceAlpha', 0.85); %project the variables from the nc file on the map axis, using "FaceAlpha" for the transparency 
         load coastlines
         outline = plotm(coastlat,coastlon, 'k', 'LineWidth', slider_control.Value);
 
